@@ -3,6 +3,8 @@
 
 package heap
 
+import "fmt"
+
 //a datastructure that can be represented as a complete tree.
 
 //max heap used to fetch the largest key -> the largest key is in the root
@@ -48,4 +50,44 @@ func right(i int) int {
 // swap keys in the array
 func (h *MaxHeap) swap(i1, i2 int) {
 	h.array[i1], h.array[i2] = h.array[i2], h.array[i1]
+}
+
+// extract returns the largest key, and removes it from the heap
+func (h *MaxHeap) Extract() int {
+	extracted := h.array[0]
+	l := len(h.array)
+
+	//edge case for empty array
+	if len(h.array) == 0 {
+		fmt.Printf("Cannot extract because array length is 0\n")
+		return -1
+	}
+
+	h.array[0] = h.array[l-1]
+	//make the slice shorter to get the rid of the last one
+	h.array = h.array[:l]
+
+	return extracted
+}
+
+func (h *MaxHeap) maxHeapifyDown(index int) {
+	//heapify from top to bottom
+	//loop while index has at least one child
+	lastIndex := len(h.array) - 1
+	l, r := left(index), right(right)
+	childToCompare := 0
+
+	//loop while index has at least one child
+	for l <= lastIndex {
+		//when left is the only child
+		if l == lastIndex {
+			childToCompare = l
+		} else if h.array[l] > h.array[r] {
+			//when left child is larger
+			childToCompare = l
+		} else {
+			//when right child is larger
+			childToCompare = r
+		}
+	}
 }

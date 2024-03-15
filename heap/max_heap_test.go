@@ -10,6 +10,7 @@ func TestMaxHeap(t *testing.T) {
 	}
 	if len(m.array) != 3 {
 		t.Errorf("expected length=%v,got %v", 3, len(m.array))
+		
 	}
 
 }
